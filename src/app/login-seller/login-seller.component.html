@@ -1,0 +1,16 @@
+<div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+  {{errorMessage}}
+</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" class="form-control" id="username" formControlName="username" placeholder="username" [ngClass]="configureErrorStyle('username')">
+    <div class="invalid-feedback">Username cannot be empty</div>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" formControlName="password" placeholder="password" [ngClass]="configureErrorStyle('password')">
+    <div class="invalid-feedback">Password cannot be empty</div>
+  </div>
+  <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Log In</button>
+</form>
