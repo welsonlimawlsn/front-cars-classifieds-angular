@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LoginSellerService} from '../services/login-seller.service';
+import {FormUtilsService} from '../utils/form-utils.service';
 
 @Component({
   selector: 'app-login-seller',
@@ -12,7 +13,7 @@ export class LoginSellerComponent implements OnInit {
   form: FormGroup;
   errorMessage: string;
 
-  constructor(private formBuilder: FormBuilder, private loginService: LoginSellerService) { }
+  constructor(private formBuilder: FormBuilder, private loginService: LoginSellerService, private formUtils: FormUtilsService) { }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -31,15 +32,8 @@ export class LoginSellerComponent implements OnInit {
     }
   }
 
-  verifyIfFieldIsTouchedAndIsInvalid(fieldName: string): boolean {
-    const field = this.form.get(fieldName);
-    return !field.valid && field.touched;
-  }
-
   configureErrorStyle(fieldName: string) {
-    return {
-      'is-invalid': this.verifyIfFieldIsTouchedAndIsInvalid(fieldName)
-    };
+    return this.formUtils.configureErrorStyle(fieldName, this.form);
   }
 
 }

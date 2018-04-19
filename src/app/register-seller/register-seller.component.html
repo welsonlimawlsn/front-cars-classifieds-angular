@@ -1,0 +1,49 @@
+<h3>Register. Already have an account? Sign in now, <a routerLink="/login">click here</a></h3>
+<div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+  {{errorMessage}}
+</div>
+<div class="alert alert-success" role="alert" *ngIf="successMessage">
+  {{successMessage}}
+</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div formGroupName="seller">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" placeholder="enter name" formControlName="name" [ngClass]="configureErrorStyle('seller.name')">
+      <div class="invalid-feedback">Name cannot be empty</div>
+    </div>
+    <div class="form-group">
+      <label for="email">E-mail</label>
+      <input type="email" class="form-control" id="email" placeholder="enter email" formControlName="email" [ngClass]="configureErrorStyle('seller.email')">
+      <div class="invalid-feedback">E-mail cannot be empty or invalid</div>
+    </div>
+    <div class="row">
+      <div class="col-md">
+        <div class="form-group">
+          <label for="dateOfBirth">Date of Birth</label>
+          <input type="date" class="form-control" id="dateOfBirth" placeholder="enter date of birth" max="now" formControlName="dateOfBirth" [ngClass]="configureErrorStyle('seller.dateOfBirth')">
+          <div class="invalid-feedback">Date of Birth cannot be empty</div>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="form-group">
+          <label for="identificationDocument">Identification Document</label>
+          <input type="text" class="form-control" id="identificationDocument" placeholder="enter identification document" formControlName="identificationDocument" [ngClass]="configureErrorStyle('seller.identificationDocument')">
+          <div class="invalid-feedback">Identification Document cannot be empty</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dropdown-divider"></div>
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" class="form-control" id="username" placeholder="enter username" formControlName="username" [ngClass]="configureErrorStyle('username')">
+    <div class="invalid-feedback">Username cannot be empty</div>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" placeholder="enter password" formControlName="password" [ngClass]="configureErrorStyle('password')">
+    <div class="invalid-feedback">Password cannot be empty</div>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
+</form>
